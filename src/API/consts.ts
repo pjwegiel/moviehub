@@ -3,3 +3,5 @@ export const headers = {
     'X-RapidAPI-host': import.meta.env.VITE_X_RapidAPI_Host as string,
     'Content-Type': 'application/json',
 }
+
+export const moviesDBUrl = 'https://moviesminidatabase.p.rapidapi.com'

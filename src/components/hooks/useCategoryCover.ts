@@ -1,20 +1,13 @@
-import { useEffect, useState } from 'react'
-import { headers } from '../../API/headers'
+import { useState, useEffect } from 'react'
+import { headers, moviesDBUrl } from '../../API/consts'
 
-interface MovieGenreCoverProps {
-    genre: string
-}
-
-export function MovieGenreCover({ genre }: MovieGenreCoverProps): JSX.Element {
+export function useCategoryCover(genre: string): string {
     const [cover, setCover] = useState('')
     useEffect(() => {
-        fetch(
-            `https://moviesminidatabase.p.rapidapi.com/movie/byGen/${genre}/`,
-            {
-                method: 'GET',
-                headers,
-            }
-        )
+        fetch(`${moviesDBUrl}/movie/byGen/${genre}/`, {
+            method: 'GET',
+            headers,
+        })
             .then(async (res) => await res.json())
             .then((res) => {
                 const id = res.results.pop().imdb_id as string
@@ -33,14 +26,5 @@ export function MovieGenreCover({ genre }: MovieGenreCoverProps): JSX.Element {
             })
             .catch((err) => console.log(err))
     }, [])
-    return (
-        <div className="relative cursor-pointer rounded">
-            <div className="bg-black/60 w-full h-full absolute flex rounded">
-                <p className="text-white m-auto text-xl font-extrabold">
-                    {genre}
-                </p>
-            </div>
-            <img src={cover} alt={genre} />
-        </div>
-    )
+    return cover
 }

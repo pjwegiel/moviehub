@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const navbarOptions = ['Home', 'Movies', 'TV Series', 'Account']
+const navbarOptions = ['Home', 'Movies', 'Series', 'Account']
 
 export function Navbar(): JSX.Element {
     const [currentNavbarOption, setCurrentNavbarOption] = useState(
@@ -8,7 +9,7 @@ export function Navbar(): JSX.Element {
     )
     return (
         <nav className="flex bg-teal-800 min-w-full px-6 py-2 justify-between text-white font-sans">
-            <a href="#" className="flex">
+            <Link to="/" className="flex">
                 <img
                     src="https://cdn-icons-png.flaticon.com/512/864/864781.png"
                     alt="MovieHub"
@@ -17,12 +18,16 @@ export function Navbar(): JSX.Element {
                 <span className="my-auto font-bold text-2xl ml-2">
                     MovieHub
                 </span>
-            </a>
+            </Link>
             <ul className="flex my-auto">
                 {navbarOptions.map((navbarOption) => (
                     <li key={navbarOption}>
-                        <a
-                            href="#"
+                        <Link
+                            to={
+                                navbarOption.toLowerCase() === 'home'
+                                    ? '/'
+                                    : `/${navbarOption.toLowerCase()}`
+                            }
                             className={`text-white pl-4 font-semibold ${
                                 currentNavbarOption === navbarOption
                                     ? 'underline'
@@ -31,7 +36,7 @@ export function Navbar(): JSX.Element {
                             onClick={() => setCurrentNavbarOption(navbarOption)}
                         >
                             {navbarOption}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

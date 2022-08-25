@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function TopSection(): JSX.Element {
     return (
         <div className="bg-teal-800 px-2 text-white py-12">
@@ -12,15 +14,19 @@ export function TopSection(): JSX.Element {
                         create collection of your wathed movies and share them
                         with friends!
                     </p>
-                    <button className="bg-white text-teal-800 px-6 py-3 font-semibold">
-                        Browse Movies
-                    </button>
+                    <Link to="/movies">
+                        <button className="bg-white text-teal-800 px-6 py-3 font-semibold transition ease-in-out duration-500 hover:scale-110">
+                            Browse Movies
+                        </button>
+                    </Link>
                 </div>
                 <div className="flex w-1/2 group relative">
                     <div className="absolute hidden w-full h-full rounded group-hover:flex group-hover:backdrop-blur-sm">
-                        <button className="m-auto bg-white text-teal-800 px-6 py-3 font-semibold transition duration-500 hover:scale-110">
-                            Browse movies
-                        </button>
+                        <Link to="/movies" className="m-auto">
+                            <button className=" bg-white text-teal-800 px-6 py-3 font-semibold transition duration-500 hover:scale-110">
+                                Browse movies
+                            </button>
+                        </Link>
                     </div>
                     <img
                         src="https://www.ubuy.com/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFCUHV2K2lSYkwuX0FDX1NMMTAwMF8uanBn.jpg"

@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react'
-import { headers, moviesDBUrl } from '../../API/consts'
+import { fetchData } from '../../API/consts'
 
-export function useFetchByCategory(category: string): any {
-    const [fetchedData, setFetchedData] = useState<any[]>([])
+interface IMovie {
+    title: string
+    imdb_id: string
+}
 
+type IMovies = IMovie[]
+
+export function useFetchByCattegory(
+    type: 'movie' | 'series',
+    mainCategory: 'Genre' | 'Year',
+    subCategory: string
+): IMovies {
+    const [results, setResults] = useState([])
+    const mainCategoryName = mainCategory === 'Genre' ? 'Gen' : mainCategory
     useEffect(() => {
-        fetch(`${moviesDBUrl}/movie/byGen/${category}/`, { headers })
-            .then(async (res) => await res.json())
+        fetchData(`${type}/by${mainCategoryName}/${subCategory}/`)
             .then((res) => {
-                setFetchedData(res.results)
+                setResults(res.results)
             })
             .catch((err) => console.log(err))
     }, [])
-    return fetchedData
+    return results
 }

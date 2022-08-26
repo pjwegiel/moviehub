@@ -1,26 +1,16 @@
 import { useEffect, useState } from 'react'
-import { headers, moviesDBUrl } from '../../API/consts'
+import { fetchData } from '../../API/consts'
 
-interface IGenre {
-    genre: string
-}
-
-type IGenres = IGenre[]
-
-export function useGenres(): IGenres {
-    const [genres, setGenres] = useState([])
+export function useGenres(): string[] {
+    const [results, setResults] = useState([])
     useEffect(() => {
-        fetch(`${moviesDBUrl}/genres/`, {
-            method: 'GET',
-            headers,
-        })
-            .then((res: any) => {
-                return res.json()
-            })
+        fetchData('genres/')
             .then((res) => {
-                setGenres(res.results)
+                setResults(
+                    res.results.map(({ genre }: { genre: string }) => genre)
+                )
             })
             .catch((err) => console.log(err))
     }, [])
-    return genres
+    return results
 }

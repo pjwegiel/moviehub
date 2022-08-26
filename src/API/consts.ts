@@ -5,3 +5,11 @@ export const headers = {
 }
 
 export const moviesDBUrl = 'https://moviesminidatabase.p.rapidapi.com'
+
+export async function fetchData(url: string): Promise<any> {
+    const response = await fetch(`${moviesDBUrl}/${url}`, {
+        method: 'GET',
+        headers,
+    })
+    return await response.json()
+}

@@ -1,7 +1,14 @@
-import { Genres } from '../../reusable/Genres'
+import { useGenres } from '../../hooks/useGenres'
+import { Category } from '../../reusable/Category'
 import { Search } from '../../reusable/Search'
 
+const years: string[] = []
+for (let i = new Date().getFullYear(); i >= 1960; i--) {
+    years.push(String(i))
+}
+
 export function Movies(): JSX.Element {
+    const genres = useGenres()
     return (
         <>
             <div className="container m-auto py-12">
@@ -10,7 +17,12 @@ export function Movies(): JSX.Element {
                 </h2>
             </div>
             <Search />
-            <Genres type="Movies" />
+            <Category
+                mainCategory="Genre"
+                type="movie"
+                subCategories={genres}
+            />
+            <Category mainCategory="Year" type="movie" subCategories={years} />
         </>
     )
 }

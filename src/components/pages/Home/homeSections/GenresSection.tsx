@@ -23,8 +23,13 @@ export function GenresSection({
                     </Link>
                 </div>
                 <div className="flex w-full justify-between py-10">
-                    {slicedGenres.map(({ genre }) => (
-                        <CategoryCover key={genre} genre={genre} />
+                    {slicedGenres.map((genre) => (
+                        <CategoryCover
+                            key={genre}
+                            type="movie"
+                            mainCategory="Genre"
+                            subCategory={genre}
+                        />
                     ))}
                 </div>
             </div>

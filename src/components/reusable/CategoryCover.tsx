@@ -10,9 +10,9 @@ export function CategoryCover({
     type,
     mainCategory,
     subCategory,
-}: CategoryCoverProps): JSX.Element | null {
+}: CategoryCoverProps): JSX.Element {
     const cover = useCategoryCover(type, mainCategory, subCategory)
-    return cover !== null ? (
+    return (
         <div className="relative cursor-pointer transition ease-in-out duration-500 hover:scale-110">
             <div className="bg-black/60 h-full w-full absolute flex group align-center">
                 <p className="text-white m-auto text-xl font-extrabold ">
@@ -21,5 +21,5 @@ export function CategoryCover({
             </div>
             <img src={cover} alt={subCategory}></img>
         </div>
-    ) : null
+    )
 }

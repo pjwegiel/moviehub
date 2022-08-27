@@ -1,14 +1,24 @@
-import { useFetchByCattegory } from './useFetchByCategory'
-import { useMovieOrSeriesByID } from './useMovieOrSeriesByID'
+import { useEffect, useState } from 'react'
+import { fetchData } from '../../API/consts'
+import { IMovie, IMovieOrSeries } from './types'
 
 export function useCategoryCover(
     type: 'movie' | 'series',
     mainCategory: 'Genre' | 'Year',
     subCategory: string
-): string | null {
-    const categoryData = useFetchByCattegory(type, mainCategory, subCategory)
-    const movieFromCategoryID =
-        categoryData.length > 0 ? categoryData[0].imdb_id : null
-    const movieCover = useMovieOrSeriesByID(type, movieFromCategoryID).image_url
-    return movieCover
+): string {
+    const [cover, setCover] = useState('')
+    const mainCategoryName = mainCategory === 'Genre' ? 'Gen' : mainCategory
+    useEffect(() => {
+        fetchData(`${type}/by${mainCategoryName}/${subCategory}/`)
+            .then(({ results }: { results: IMovie[] }) => {
+                fetchData(`${type}/id/${results[0].imdb_id}/`)
+                    .then((response: { results: IMovieOrSeries }) => {
+                        setCover(response.results.image_url)
+                    })
+                    .catch((error) => console.log(error))
+            })
+            .catch((err) => console.log(err))
+    }, [])
+    return cover
 }

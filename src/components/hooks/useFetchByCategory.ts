@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchData } from '../../API/consts'
-
-interface IMovie {
-    title: string
-    imdb_id: string
-}
-
-type IMovies = IMovie[]
+import { IMovies } from './types'
 
 export function useFetchByCattegory(
     type: 'movie' | 'series',

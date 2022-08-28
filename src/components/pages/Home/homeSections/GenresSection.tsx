@@ -5,7 +5,7 @@ import { CategoryCover } from '../../../reusable/CategoryCover'
 export function GenresSection({
     type,
 }: {
-    type: 'Movies' | 'Series'
+    type: 'movies' | 'series'
 }): JSX.Element {
     const genres = useGenres()
     const slicedGenres = genres.slice(0, 7)
@@ -26,7 +26,7 @@ export function GenresSection({
                     {slicedGenres.map((genre) => (
                         <CategoryCover
                             key={genre}
-                            type="movie"
+                            type={type}
                             mainCategory="Genre"
                             subCategory={genre}
                         />

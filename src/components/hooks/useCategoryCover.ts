@@ -3,22 +3,26 @@ import { fetchData } from '../../API/consts'
 import { IMovie, IMovieOrSeries } from './types'
 
 export function useCategoryCover(
-    type: 'movie' | 'series',
+    type: 'movies' | 'series',
     mainCategory: 'Genre' | 'Year',
     subCategory: string
 ): string {
     const [cover, setCover] = useState('')
     const mainCategoryName = mainCategory === 'Genre' ? 'Gen' : mainCategory
+    const typeName = type === 'movies' ? 'movie' : type
     useEffect(() => {
-        fetchData(`${type}/by${mainCategoryName}/${subCategory}/`)
+        fetchData(`${typeName}/by${mainCategoryName}/${subCategory}/`)
             .then(({ results }: { results: IMovie[] }) => {
-                fetchData(`${type}/id/${results[0].imdb_id}/`)
-                    .then((response: { results: IMovieOrSeries }) => {
-                        setCover(response.results.image_url)
-                    })
-                    .catch((error) => console.log(error))
+                const result = results.pop()
+                if (result !== undefined) {
+                    fetchData(`${typeName}/id/${result?.imdb_id}/`)
+                        .then((response: { results: IMovieOrSeries }) => {
+                            setCover(response.results.image_url)
+                        })
+                        .catch((error) => console.log(error))
+                }
             })
-            .catch((err) => console.log(err))
+            .catch(() => setCover(''))
     }, [])
     return cover
 }

@@ -5,8 +5,8 @@ export function Home(): JSX.Element {
     return (
         <>
             <TopSection />
-            <GenresSection type="Movies" />
-            <GenresSection type="Series" />
+            <GenresSection type="movies" />
+            <GenresSection type="series" />
         </>
     )
 }

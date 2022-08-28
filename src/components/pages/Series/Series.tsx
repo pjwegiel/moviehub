@@ -1,5 +1,5 @@
 import { useGenres } from '../../hooks/useGenres'
-import { Category } from '../../reusable/Category'
+import { Categories } from '../../reusable/Categories'
 import { Search } from '../../reusable/Search'
 
 const years: string[] = []
@@ -17,12 +17,16 @@ export function Series(): JSX.Element {
                 </h2>
             </div>
             <Search />
-            <Category
+            <Categories
                 mainCategory="Genre"
                 type="series"
                 subCategories={genres}
             />
-            <Category mainCategory="Year" type="series" subCategories={years} />
+            <Categories
+                mainCategory="Year"
+                type="series"
+                subCategories={years}
+            />
         </>
     )
 }

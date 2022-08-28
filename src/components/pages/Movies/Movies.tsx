@@ -1,5 +1,5 @@
 import { useGenres } from '../../hooks/useGenres'
-import { Category } from '../../reusable/Category'
+import { Categories } from '../../reusable/Categories'
 import { Search } from '../../reusable/Search'
 
 const years: string[] = []
@@ -17,12 +17,16 @@ export function Movies(): JSX.Element {
                 </h2>
             </div>
             <Search />
-            <Category
+            <Categories
                 mainCategory="Genre"
-                type="movie"
+                type="movies"
                 subCategories={genres}
             />
-            <Category mainCategory="Year" type="movie" subCategories={years} />
+            <Categories
+                mainCategory="Year"
+                type="movies"
+                subCategories={years}
+            />
         </>
     )
 }

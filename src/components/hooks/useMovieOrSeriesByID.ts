@@ -3,9 +3,10 @@ import { fetchData } from '../../API/consts'
 import { IMovieOrSeries } from './types'
 
 export function useMovieOrSeriesByID(
-    type: 'movie' | 'series',
+    type: 'movies' | 'series',
     id: string
 ): IMovieOrSeries {
+    const typeName = type === 'movies' ? 'movie' : type
     const [movieOrSeries, setMovieOrSeries] = useState<IMovieOrSeries>({
         imdb_id: '',
         title: '',
@@ -27,7 +28,7 @@ export function useMovieOrSeriesByID(
         keywords: [],
     })
     useEffect(() => {
-        fetchData(`${type}/id/${id}/`)
+        fetchData(`${typeName}/id/${id}/`)
             .then((res) => {
                 setMovieOrSeries(res.results)
             })
